@@ -285,3 +285,14 @@ input[type=password]:placeholder {
 #icon {
   width:60%;
 }
+
+#loginButton {
+    width: 30%;
+    text-align: center;
+    float: left;
+}
+#cancelButton {
+    width: 30%;
+    text-align: center;
+    float: right;
+}

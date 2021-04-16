@@ -15,18 +15,19 @@ public class Select extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        DataBase.INSTANCE.users.readAll();
+        String buttonName = req.getParameter("button");
+        if (buttonName.compareTo("Cancel") == 0) return;
 
-        if (DataBase.INSTANCE.users.put(new DataBase.Users.User(login, password, "", false, ""))) {
-            servletContext.setAttribute("loginName", login);
+//        if (DataBase.INSTANCE.users.put(new DataBase.Users.User(login, password, "", false, ""))) {
+
+        req.setAttribute("login", login);
             getServletContext().getRequestDispatcher("/user.jsp").forward(req, resp);
-            return;
-        }
-        else {
-            DataBase.Users.User user = DataBase.INSTANCE.users.findKey(login);
-            if (user.is_mentor) {
-
-            }
-        }
+//        }
+//        else {
+//            DataBase.Users.User user = DataBase.INSTANCE.users.findKey(login);
+//            if (user.is_mentor) {
+//
+//            }
+//        }
     }
 }
