@@ -1,0 +1,10 @@
+.icon {
+    width: 10%;
+    float: right;
+}
+.title {
+    width: 90%;
+    float: left;
+    text-align: center;
+    color: blue;
+}
