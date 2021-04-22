@@ -8,7 +8,7 @@ import java.util.Objects;
 public enum DataBase {
     INSTANCE;
 
-    public final static String DB_PATH = "C:/Work/Own/Java/dataconsult_db/";
+    public final static String DB_PATH = "c:/Work/Own/Java/dataconsult_db/";
 
     public Users users = new Users();
     public Consultations consultations = new Consultations();

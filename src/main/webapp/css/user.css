@@ -1,6 +1,11 @@
 h1 {
 color: blue;
 }
-.form{
-    width: 15%;
+.frm {
+    width: 30%;
+    border: double black 2px;
+    background-color: #fcf8e3;
+}
+input {
+    padding: 30px;
 }

@@ -4,12 +4,4 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-<!--  <servlet>-->
-<!--    <servlet-name>timeNow</servlet-name>-->
-<!--    <servlet-class>TimeNow</servlet-class>-->
-<!--  </servlet>-->
-<!--  <servlet-mapping>-->
-<!--    <servlet-name>timeNow</servlet-name>-->
-<!--    <url-pattern>/time</url-pattern>-->
-<!--  </servlet-mapping>-->
 </web-app>

@@ -2,25 +2,54 @@
 <html>
 <head>
 <link href="css/user.css" rel="stylesheet" id="bootstrap-css">
+<style>
+    .frm {
+    border: 4px double blue;
+    width: 20%;
+    padding: 10px;
+    }
+
+    .radiobutton {
+    padding: 5px;
+    }
+    .user {
+    padding: 5px;
+    }
+    .buttons {
+    padding: 10px;
+    }
+</style>
 </head>
 <body>
-    <div class="newUser"  align="center">
-    <div class="logo">
-         <img src="https:/progwards.ru/wp-content/uploads/2020/09/f.png">
-    </div>
-    <h1>Карточка нового пользователя</h1><br>
-    <label for="login">Login:</label>
-    <%= request.getAttribute("login")%>
-    <form method = "post" action = "/sel" class="form">
-        <label for="userName">Ваше имя</label>
-        <input type="text" id="userName"><br>
-        <label for="mentorType">Вы преподаватель</label> 
-        <input type="checkbox" id="mentorType" name="mentorType"><br>
-        <label for="userName">Ваш email</label>
-        <input type="text" id="email" name="email"><br>
-        <input type="submit"  value="Сохранить">
+
+    <h1 align="center">Карточка пользователя</h1>
+    <div align="center">
+    <form method = "post" action = "plan" class="frm" >
+        <%= "Логин: " + request.getAttribute("login")%>
+        <input type="hidden" id="login" name="login" value= "<%= request.getAttribute("login")%>">
+        <br>
+        <div align="left" class="user">
+        <label for="userName">Имя:</label>
+        <input type="text" id="userName" name="userName" readonly value= "<%= request.getAttribute("userName")%>">
+        </div>
+        <br>
+        <div class="radiobutton" align="left">
+        <input type="radio" id="isMentor" name="isMentor" value="mentor" class="field"
+        <%= request.getAttribute("isMentor") == "mentor" ? "checked" : ""%>>
+        <label> Преподаватель</label>
+        <br>
+        <input type="radio" id="isMentor" name="isMentor" value="student" class="field"
+        <%= request.getAttribute("isMentor") == "student" ? "checked" : ""%>>
+        <label> Студент</label>
+        <div>
+        <br>
+        <label for="email">Ваш email</label>
+        <input type="text" id="email" name="email" readonly value=<%= request.getAttribute("email")%>>
+        <br>
+        <div align="center" class="buttons">
+        <input type="submit" name="button" value="Консультации"
+        <div>
     </form>
     </div>
-
 </body>
 </html>
