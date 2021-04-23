@@ -11,7 +11,6 @@ import java.util.List;
 @WebServlet(urlPatterns = "/plan")
 public class Plan extends HttpServlet {
     String comandLine ="";
-    int count = 0;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,7 +43,8 @@ public class Plan extends HttpServlet {
             List<DataBase.Schedule.Value> scheduleList =
                     DataBase.INSTANCE.schedule.select(x->x.mentor.compareTo(login)==0);
             comandLine = "";
-            scheduleList.forEach(x-> tableLineCreate(x));
+            createTable(scheduleList);
+            System.out.println(comandLine);
             req.setAttribute("tableLine",comandLine);
             getServletContext().getRequestDispatcher("/mentorSchedule.jsp").forward(req, resp);
         }
@@ -52,30 +52,54 @@ public class Plan extends HttpServlet {
             //если нажата кнопка консультации для студента
             req.setAttribute("userName", userName);
             req.setAttribute("login", login);
-            List<DataBase.Users.User>userList = DataBase.INSTANCE.users.select(x->x.is_mentor);
+            List<DataBase.Users.User>users = DataBase.INSTANCE.users.select(x->x.is_mentor);
             comandLine ="";
-            userList.forEach(x-> comandLine += "<option value=" + "\"" + x.login + "\"" +
+            users.forEach(x-> comandLine += "<option value=" + "\"" + x.login + "\"" +
                     ">" + x.name+"</option>");
             req.setAttribute("mentorNames", comandLine);
 
             getServletContext().getRequestDispatcher("/choiceMentor.jsp").forward(req, resp);
         }
     }
-    void tableLineCreate(DataBase.Schedule.Value value){
-        String line = "<tr><td><select " + "name=" +"\"" + "dayOfWeek" + ++count + "\"" +">";
-        for (int i = 1; i <= 7; i ++) {
-            line += "<option value=" + "\"" + i + "\"";
-            if (value.day_of_week == i) line += " selected";
-            line += ">" + weekDay(value.getDay_of_week()) + "</option>";
-        }
-        line += "</select></td>";
-        line += "<td><field type=\"text\" name=\"timeStart" + count + "\" value = \"";
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(value.getStart());
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
-        System.out.println(format.format(cal.getTime()));
 
+    void createTable(List<DataBase.Schedule.Value>values){
+        for (int i = 1; i <= 7; i ++) {
+            comandLine += "<tr><td><input type=\"checkbox\" name=\"weekday" + i + "\" id=\"weekday" + i + "\"";
+            if (mentorBusy(values, i)) comandLine += " checked ";
+            comandLine += ">";
+            comandLine += "<label for=\"weekday\"" + i + ">" + weekDay(i) + "</label></td>";
+            comandLine += "<td><input type=\"text\" name=\"timestart" + i +
+                    "\" value=" + "\"" + getTimeStart(values, i) +"\"></td>";
+
+            comandLine += "<td><input type=\"text\" name=\"duration" + i +
+                    "\" value=" + "\"" + getDuration(values, i) +"\"></td></tr>";
+
+        }
     }
+
+    boolean mentorBusy(List<DataBase.Schedule.Value>values, int n){
+    for (DataBase.Schedule.Value value : values)
+        if (value.getDay_of_week() == n) return true;
+    return false;
+    }
+
+    Long getDuration(List<DataBase.Schedule.Value>values, int n){
+        for (DataBase.Schedule.Value value : values)
+            if (value.getDay_of_week() == n) return value.getDuration();
+        return 0L;
+    }
+
+    String getTimeStart(List<DataBase.Schedule.Value>values, int n) {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+        for (DataBase.Schedule.Value value : values)
+            if (value.getDay_of_week() == n) {
+                cal.setTimeInMillis(value.getStart());
+                return format.format(cal.getTime());
+            }
+        return "";
+    }
+
     String weekDay(int n){
         switch (n){
             case 1: return "Понедельник";
