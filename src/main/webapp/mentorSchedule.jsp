@@ -16,7 +16,7 @@
     <td>Начало</td>
     <td>Продолжительность</td>
 </tr>
-<%= request.getAttribute("comandLine")%>
+<%= request.getAttribute("tableLine")%>
 </table>
 </form>
 </div>
