@@ -39,7 +39,7 @@ public abstract class AbstractDbTable<K, V> implements IDbTable<K, V> {
     @Override
     public boolean put(V elem) throws IOException {
         V newElem = valueMap.put(getKey(elem), elem);
-        if (newElem == null)
+//        if (newElem == null)
             saveAll();
         return newElem == null;
     }

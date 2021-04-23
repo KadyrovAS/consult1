@@ -30,7 +30,7 @@
         <br>
         <div align="left" class="user">
         <label for="userName">Имя:</label>
-        <input type="text" id="userName" name="userName" readonly value= "<%= request.getAttribute("userName")%>">
+        <input type="text" id="userName" name="userName" value= "<%= request.getAttribute("userName")%>">
         </div>
         <br>
         <div class="radiobutton" align="left">
@@ -44,10 +44,11 @@
         <div>
         <br>
         <label for="email">Ваш email</label>
-        <input type="text" id="email" name="email" readonly value=<%= request.getAttribute("email")%>>
+        <input type="text" id="email" name="email" value=<%= request.getAttribute("email")%>>
         <br>
         <div align="center" class="buttons">
-        <input type="submit" name="button" value="Консультации"
+        <input type="submit" name="button" value="Сохранить">
+        <input type="submit" name="button" value="Консультации">
         <div>
     </form>
     </div>
