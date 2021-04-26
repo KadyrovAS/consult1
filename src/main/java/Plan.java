@@ -44,7 +44,6 @@ public class Plan extends HttpServlet {
                     DataBase.INSTANCE.schedule.select(x->x.mentor.compareTo(login)==0);
             comandLine = "";
             createTable(scheduleList);
-            System.out.println(comandLine);
             req.setAttribute("tableLine",comandLine);
             getServletContext().getRequestDispatcher("/mentorSchedule.jsp").forward(req, resp);
         }
@@ -91,7 +90,7 @@ public class Plan extends HttpServlet {
 
     String getTimeStart(List<DataBase.Schedule.Value>values, int n) {
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("hh:mm");
         for (DataBase.Schedule.Value value : values)
             if (value.getDay_of_week() == n) {
                 cal.setTimeInMillis(value.getStart());
