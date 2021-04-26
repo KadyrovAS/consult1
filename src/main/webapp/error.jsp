@@ -8,11 +8,14 @@
     <div class="logo">
          <img src="https:/progwards.ru/wp-content/uploads/2020/09/f.png">
     </div>
-    <form method = "post" action = "/index.jsp" class="form">
+    <form method = "post" action = "<%= request.getAttribute("endpoint")%>" class="form">
+        <input type="hidden" id="login" name="login" value= "<%= request.getAttribute("login")%>">
         <input type="text" disabled id="message" name="message" value= "<%= request.getAttribute("messageText")%>">
         <br>
         <br>
-        <input type="submit" value="ok">
+        <div align="center">
+        <input type="submit" value="ok" id="button">
+        </div>
     </form>
     </div>
 

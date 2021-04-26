@@ -11,15 +11,18 @@ public class User extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
+
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         if (login.trim().compareTo("") == 0) {
             //введена пустая строка
             req.setAttribute("messageText", "Введите логин");
+            req.setAttribute("endpoint","index.jsp");
             getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
         }
         else if (password.trim().compareTo("") == 0){
             req.setAttribute("messageText", "Введите пароль");
+            req.setAttribute("endpoint","index.jsp");
             getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
         }
         else {
@@ -27,11 +30,13 @@ public class User extends HttpServlet {
             if (user == null) {
                 String messageText = "Пользователь с логином " + login + " в базе данных отсутствует.";
                 req.setAttribute("messageText", messageText);
+                req.setAttribute("endpoint","index.jsp");
                 getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
             }
             else if(user.password.compareTo(password) != 0) {
                 String messageText = "Вы ошиблись при вводе пароля! Попробуйте ввести пароль еще раз.";
                 req.setAttribute("messageText", messageText);
+                req.setAttribute("endpoint","index.jsp");
                 getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
             }
             else {

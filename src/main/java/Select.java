@@ -15,8 +15,6 @@ public class Select extends HttpServlet {
         DataBase.INSTANCE.users.readAll();
         if (!DataBase.INSTANCE.users.exists(login)) {
             req.setAttribute("login-description", login);
-//        String password = req.getParameter("password");
-//        req.setAttribute("password-description", password);
             req.getRequestDispatcher("newUser.jsp").forward(req, resp);
         }
         else {
