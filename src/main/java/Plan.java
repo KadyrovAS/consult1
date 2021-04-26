@@ -56,7 +56,6 @@ public class Plan extends HttpServlet {
             users.forEach(x-> comandLine += "<option value=" + "\"" + x.login + "\"" +
                     ">" + x.name+"</option>");
             req.setAttribute("mentorNames", comandLine);
-
             getServletContext().getRequestDispatcher("/choiceMentor.jsp").forward(req, resp);
         }
     }
