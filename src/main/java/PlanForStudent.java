@@ -13,7 +13,6 @@ public class PlanForStudent extends HttpServlet{
         resp.setCharacterEncoding("UTF-8");
         String loginStudent = req.getParameter("login");
         String loginMentor = req.getParameter("mentor");
-        System.out.println(loginStudent);
-        System.out.println(loginMentor);
+        getServletContext().getRequestDispatcher("/planForStudent.jsp").forward(req, resp);
     }
 }
